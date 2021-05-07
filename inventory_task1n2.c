@@ -1,3 +1,12 @@
+/*
+
+    Name: inventory_task1n2.c
+    Purpose: Represents a part shop
+    Author: grivera64
+    Date: 05/07/2021
+
+*/
+
 #include <stdio.h>
 #include <stdlib.h>                                                 /* For Dynamic Memory Location Functions */
 #include "readline.h"
