@@ -26,7 +26,7 @@ struct part
 /* Function Prototypes/Declarations */
 
 struct part *find_part(struct part *inventory, int number);         /* Helper Function */
-struct part *find_last(struct part *inventory);
+struct part *find_last(struct part *inventory, int n);
 
 void print_node(struct part *node);                                 /* Helper function */
 
@@ -47,6 +47,7 @@ int main(void)
 
     struct part *inventory = NULL;                              /* This refers to the first node of the inventory linked list */
     char code;
+    int n;
 
     for (;;)
     {
@@ -85,15 +86,23 @@ int main(void)
             
             /* Find Last */
             case 'f':
+
+                /* Ask User for the on hand value they are looking for */
+                printf("Please enter the quantity you are searching for: ");
+                scanf("%d", &n);
+                while (getchar() != '\n');
+
                 printf("Searching for the last node...\n");
 
-                struct part *node_found = find_last(inventory);
+                struct part *node_found = find_last(inventory, n);
                 
+                /* Print the node if found */
                 if (node_found)
                 {
                     printf("Node Found!\n\n");
                     print_node(node_found);
                 }
+                /* Else print error */
                 else
                 {
 
@@ -164,7 +173,7 @@ struct part *find_part(struct part *inventory, int number)
 } //end of find_part
 
 /* Locates the last part in the inventory */
-struct part *find_last(struct part *inventory)
+struct part *find_last(struct part *inventory, int n)
 {
 
     /* Guard case if inventory == NULL */
@@ -177,15 +186,25 @@ struct part *find_last(struct part *inventory)
     }
 
     /* Locate the last available part */
-    struct part *curr, *prev;
+    struct part *curr, *prev, *latest = NULL;
 
     for (curr = inventory, prev = NULL; 
         curr != NULL;
-        prev = curr, curr = curr -> next);
+        prev = curr, curr = curr -> next)
+    {
+
+        if (curr -> on_hand == n)
+        {
+
+            latest = curr;
+
+        }
+
+    }
     //end of for
 
     /* If curr == NULL and previous != NULL, then return the last node, otherwise, NULL */
-    return ((!curr) && (prev)) ? prev : NULL;
+    return latest;
 
 } //end of find_last
 
