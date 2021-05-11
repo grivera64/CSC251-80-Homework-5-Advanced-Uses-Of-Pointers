@@ -117,7 +117,6 @@ int main(void)
             /* Erase Part */
             case 'e':
                 inventory = erase_part(inventory);
-                clear_input();
                 break;
 
             /* Print Codes */
@@ -238,6 +237,7 @@ struct part *erase_part(struct part *inventory)
 
     printf("Enter the number of the part you want to delete: ");
     scanf("%d", &number);
+    clear_input();
 
     /* Search for part that User wants to delete */
     struct part *curr, *prev;
