@@ -58,6 +58,8 @@ int main(void)
 
         clear_input();
 
+        printf("\n\n");
+
         switch (code)
         {
 
