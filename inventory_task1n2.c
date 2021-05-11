@@ -307,21 +307,11 @@ struct part *erase_all(struct part *inventory)
             prev = curr, curr = curr -> next);
 
         /* Checking for duplicate */
-        if (curr != NULL)
+
+        if (prev) 
         {
 
-            if (prev) 
-            {
-                prev -> next = curr -> next;
-
-                free(curr);
-            }
-            else
-            {
-
-                free(inventory);
-
-            }
+            free(curr);
 
             printf("Part deleted!\n");
 
@@ -330,6 +320,8 @@ struct part *erase_all(struct part *inventory)
         }
         else
         {
+        
+            free(inventory);
 
             break;
 
