@@ -298,43 +298,23 @@ struct part *erase_all(struct part *inventory)
 {
     
     /* Free all nodes until no more nodes exist */
-    struct part *curr, *prev;
+    struct part *curr, *to_delete;
 
-    while(1)
+    for (curr = inventory, to_delete = NULL;
+        curr != NULL;
+        to_delete = curr, curr = curr -> next)
     {
-        for (curr = inventory, prev = NULL;
-            curr != NULL;
-            prev = curr, curr = curr -> next);
 
-        /* Checking for duplicate */
-        if (curr != NULL)
+        if (to_delete)
         {
-
-            if (prev) 
-            {
-                prev -> next = curr -> next;
-
-                free(curr);
-            }
-            else
-            {
-
-                free(inventory);
-
-            }
-
-            printf("Part deleted!\n");
-
-            inventory = (prev) ? inventory : NULL;
+            
+            free(to_delete);
 
         }
-        else
-        {
 
-            break;
-
-        }
     }
+
+    free(to_delete);
 
     return NULL;
 
