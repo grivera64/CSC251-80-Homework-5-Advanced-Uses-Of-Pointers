@@ -212,7 +212,7 @@ struct part *find_last(struct part *inventory, int n)
     }
     //end of for
 
-    /* If curr == NULL and previous != NULL, then return the last node, otherwise, NULL */
+    /* Return the latest value found that matches the on hand value provided by the User */
     return latest;
 
 } //end of find_last
