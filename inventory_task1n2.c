@@ -72,13 +72,11 @@ int main(void)
             /* Search */
             case 's':
                 search(inventory);
-                clear_input();
                 break;
 
             /* Update */
             case 'u':
                 update(inventory);
-                clear_input();
                 break;
 
             /* Print Inventory */
@@ -90,9 +88,18 @@ int main(void)
             case 'f':
 
                 /* Ask User for the on hand value they are looking for */
+
+                if (!inventory) 
+                {
+                    
+                    printf("Error! Inventory is empty!\n\n");
+                    break;
+
+                }
+
                 printf("Please enter the quantity you are searching for: ");
                 scanf("%d", &n);
-                while (getchar() != '\n');
+                clear_input();
 
                 printf("Searching for the last node...\n");
 
@@ -439,6 +446,8 @@ void search(struct part *inventory)
 
     }
 
+    clear_input();
+
 } //end of search
 
 /* Updates a selected part in the inventory */
@@ -479,6 +488,8 @@ void update(struct part *inventory)
         printf("Part not found!\n");
 
     }
+
+    clear_input();
 
 } //end of update
 
