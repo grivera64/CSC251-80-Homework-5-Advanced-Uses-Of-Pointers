@@ -531,6 +531,5 @@ void print_codes(void)
     printf("e - erase/remove a part from the inventory\n");
     printf("h - help menue\n");
     printf("q - quit the program\n");
-    return;
 
 } //end of print_codes
