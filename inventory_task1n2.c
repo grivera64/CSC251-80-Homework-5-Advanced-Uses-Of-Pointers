@@ -150,6 +150,14 @@ int main(void)
 struct part *find_part(struct part *inventory, int number)
 {
 
+    /* If inventory is empty, skip and return NULL */
+    if (!inventory)
+    {
+
+        return NULL;
+
+    }
+
     struct part *p;
 
     /* Find the number against the arguement value */
@@ -212,6 +220,14 @@ struct part *find_last(struct part *inventory, int n)
 /* Prints a node at the address provided */
 void print_part(struct part *node)
 {
+
+    /* Don't print if the part doesn't exist */
+    if (!node)
+    {
+
+        printf("Part does not exist!\n");
+
+    }
 
     /* Print Part Number, Name, and On-Hand */
     printf("Part Number: %d\n", node -> number);
@@ -296,6 +312,9 @@ struct part *erase_part(struct part *inventory)
 /* Erases all of the dynamically stored information to avoid memory leaks */
 struct part *erase_all(struct part *inventory)
 {
+
+    /* Skip erase all if the inventory is already empty */
+    if (!inventory) return NULL;
     
     /* Free all nodes until no more nodes exist */
     struct part *curr, *to_delete;
@@ -389,6 +408,15 @@ struct part *insert(struct part *inventory)
 void search(struct part *inventory)
 {
 
+    /* Skip search if there is no inventory to search */
+    if (!inventory)
+    {
+
+        printf("The inventory is empty!\nTry inserting a new part!\n");
+        return;
+
+    }
+
     int number;
     struct part *p;
 
@@ -416,6 +444,15 @@ void search(struct part *inventory)
 /* Updates a selected part in the inventory */
 void update(struct part *inventory)
 {
+
+    /* Fail to update if inventory is empty */
+    if (!inventory)
+    {
+
+        printf("ERROR!\nCan't update; the inventory is empty!\nTry inserting a new part!\n");
+        return;
+
+    }
 
     int number, change;
 
@@ -448,6 +485,15 @@ void update(struct part *inventory)
 /* Print the entire inventory */
 void print(struct part *inventory)
 {
+
+    /* Print empty message if the inventory is empty */
+    if (!inventory)
+    {
+
+        printf("The inventory is empty!\nTry inserting a new part!\n");
+        return;
+
+    }
 
     struct part *p;
 
