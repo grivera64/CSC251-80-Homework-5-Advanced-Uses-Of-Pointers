@@ -17,7 +17,7 @@ struct part
 {
 
     int number;
-    char name[NAME_LEN + 1];                                        /* Because last character is '\0' */
+    char name[NAME_LEN + 1];                                        /* Extra char because last character is '\0' */
     int on_hand;
     struct part *next;
 
@@ -28,18 +28,18 @@ struct part
 struct part *find_part(struct part *inventory, int number);         /* Helper Function */
 struct part *find_last(struct part *inventory, int n);
 
-void print_node(struct part *node);                                 /* Helper function */
+void print_part(struct part *node);                                 /* Helper function for printing each part */
 
 struct part *erase_part(struct part *inventory);
-struct part *erase_all(struct part *inventory);
+struct part *erase_all(struct part *inventory);                     /* To avoid memory leaks locally */
 
 struct part *insert(struct part *inventory);
 void search(struct part *inventory);
 void update(struct part *inventory);
 void print(struct part *inventory);
 
-void clear_input(void);
-void print_codes(void);
+void clear_input(void);                                             /* Clears to the next line on the terminal */
+void print_codes(void);                                             /* For ease of User experience */
 
 /* Main Function */
 int main(void)
@@ -102,7 +102,7 @@ int main(void)
                 if (node_found)
                 {
                     printf("Node Found!\n\n");
-                    print_node(node_found);
+                    print_part(node_found);
                 }
                 /* Else print error */
                 else
@@ -210,7 +210,7 @@ struct part *find_last(struct part *inventory, int n)
 } //end of find_last
 
 /* Prints a node at the address provided */
-void print_node(struct part *node)
+void print_part(struct part *node)
 {
 
     /* Print Part Number, Name, and On-Hand */
@@ -218,7 +218,7 @@ void print_node(struct part *node)
     printf("Part name: %s\n", node -> name);
     printf("Quantity on hand: %d\n", node -> on_hand);
 
-} //end of print_node
+} //end of print_part
 
 /* Erases a part while connecting the separated ends of the inventory */
 struct part *erase_part(struct part *inventory)
@@ -401,7 +401,7 @@ void search(struct part *inventory)
     if (p != NULL)
     {
 
-        print_node(p);
+        print_part(p);
 
     }
     else
